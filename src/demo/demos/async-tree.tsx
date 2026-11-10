@@ -19,8 +19,8 @@ export function AsyncTree() {
         onLoadError={() => setErrors((count) => count + 1)}
       />
       <p className="text-xs text-muted-foreground">
-        `apps` fails on its first request on purpose — press <Badge>Retry</Badge> or focus it and hit{" "}
-        <Badge>Enter</Badge> to try again.
+        The apps node fails its first request on purpose — press <Badge>Retry</Badge> or focus it and
+        hit <Badge>Enter</Badge> to try again.
         {errors > 0 ? ` Failures so far: ${errors}.` : null}
       </p>
     </div>

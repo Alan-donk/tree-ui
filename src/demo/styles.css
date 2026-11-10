@@ -84,6 +84,7 @@
   html {
     color-scheme: light;
     scroll-behavior: smooth;
+    background-color: var(--background);
   }
 
   html.dark {

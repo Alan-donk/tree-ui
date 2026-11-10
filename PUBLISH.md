@@ -3,6 +3,10 @@
 Everything below runs from the repository root (`E:\GitHub插件`). The default
 branch is `main`.
 
+> First time on this machine? Read [GITHUB-SETUP.md](./GITHUB-SETUP.md) for the
+> authentication choice (GitHub CLI, PAT or SSH) and the repository/Pages
+> settings checklist.
+
 ## 1. Rename the repository (once)
 
 ```bash

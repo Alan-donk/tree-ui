@@ -37,7 +37,9 @@
     "registry:check": "node scripts/check-registry.mjs",
     "registry:smoke": "node scripts/install-smoke.mjs",
     "set-repo": "node scripts/set-repo.mjs",
-    "verify": "npm run lint && npm run typecheck && npm run test && npm run build && npm run registry:check && npm run registry:smoke"
+    "verify": "npm run lint && npm run typecheck && npm run test && npm run build && npm run registry:check && npm run registry:smoke",
+    "screenshot": "node scripts/screenshot.mjs",
+    "preview:build": "npm run build"
   },
   "dependencies": {
     "react": "^19.3.1",
@@ -60,6 +62,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.14.0",
     "jsdom": "^31.0.0",
+    "playwright": "^1.65.0",
     "tailwindcss": "^4.3.5",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.72.2",

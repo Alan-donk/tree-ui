@@ -40,6 +40,13 @@ export default tseslint.config(
     },
   },
   {
+    // page.evaluate() callbacks run in the browser, so allow browser globals there.
+    files: ["scripts/screenshot.mjs"],
+    languageOptions: {
+      globals: { ...globals.node, ...globals.browser },
+    },
+  },
+  {
     files: ["src/**/*.test.{ts,tsx}", "src/test/**/*.ts"],
     languageOptions: {
       globals: { ...globals.node },

@@ -85,16 +85,3 @@ export function CodeFileIcon(props: ComponentProps<"svg">) {
     </svg>
   )
 }
-
-export function JsonFileIcon(props: ComponentProps<"svg">) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" {...props}>
-      <path
-        d="M14.5 4.5c-1.5 0-2.5 1-2.5 2.5v1.5c0 1-.7 1.75-1.75 1.75 1.05 0 1.75.75 1.75 1.75V14c0 1.5 1 2.5 2.5 2.5M9.5 4.5C11 4.5 12 5.5 12 7v1.5c0 1 .7 1.75 1.75 1.75-1.05 0-1.75.75-1.75 1.75V14c0 1.5-1 2.5-2.5 2.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-    </svg>
-  )
-}

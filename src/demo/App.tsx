@@ -25,7 +25,7 @@ import { installCommand, registryUrl, repoUrl, site, siteUrl } from "@/demo/site
 const features = [
   {
     title: "Keyboard first",
-    body: "Roving tabindex, arrow navigation, typeahead and `*` to expand a whole level. Every row exposes level, position and set size.",
+    body: "Roving tabindex, arrow navigation, typeahead and a wildcard to expand a whole level. Every row exposes level, position and set size.",
   },
   {
     title: "Zero dependencies",
@@ -33,11 +33,11 @@ const features = [
   },
   {
     title: "Async children",
-    body: "Pass `loadChildren` and nodes fetch on first expand, cache the result and announce failures with a retry affordance.",
+    body: "Pass a loadChildren function and nodes fetch on first expand, cache the result and announce failures with a retry affordance.",
   },
   {
     title: "Controlled or not",
-    body: "Expansion and selection both work controlled or uncontrolled. Swap in `expandedIds` / `selectedIds` whenever you need them.",
+    body: "Expansion and selection both work controlled or uncontrolled. Swap in expandedIds or selectedIds whenever you need them.",
   },
 ]
 
@@ -161,11 +161,11 @@ export function App() {
             with the shadcn CLI and own the three files it writes.
           </p>
 
-          <div className="mt-7 flex max-w-xl items-center gap-2 rounded-lg border border-border bg-muted/30 p-1.5 ps-3">
+          <div className="mt-7 flex max-w-2xl items-center gap-2 rounded-lg border border-border bg-muted/30 p-1.5 ps-3">
             <span aria-hidden="true" className="font-mono text-sm text-muted-foreground select-none">
               $
             </span>
-            <code className="min-w-0 flex-1 overflow-x-auto font-mono text-xs text-foreground sm:text-sm">
+            <code className="min-w-0 flex-1 overflow-x-auto font-mono text-[13px] whitespace-nowrap text-foreground">
               {installCommand}
             </code>
             <CopyButton value={installCommand} label="Copy install command" />

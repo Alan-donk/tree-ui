@@ -3,6 +3,10 @@
 > An accessible, zero-dependency tree view for shadcn/ui projects. Install with the
 > shadcn CLI and own the three files it writes.
 
+[![tree-ui demo](docs/preview.png)]({{SITE_URL}})
+
+**Live demo:** {{SITE_URL}} · **Registry:** {{REGISTRY_URL}}
+
 ## Install
 
 ```bash
@@ -65,6 +69,8 @@ retry affordance that is also reachable with Enter.
 Cmd/Ctrl-click toggles, Shift-click selects the visible range, disabled nodes are
 skipped.
 
+![Four live examples: file tree, async children, multi-select and custom slots](docs/examples.png)
+
 ## API
 
 | Prop | Type | Default | Description |
@@ -111,13 +117,23 @@ Implements the WAI-ARIA tree view pattern: a single tab stop with roving focus,
 Transitions are `motion-safe` only. Tests include an axe scan of the rendered
 tree.
 
+![Keyboard reference and accessibility notes](docs/accessibility.png)
+
 ## Development
 
 ```bash
 npm install
 npm run dev        # demo site
+npm run screenshot # refresh docs/*.png from the built demo
 npm run verify     # lint + typecheck + tests + build + registry checks
 ```
+
+`npm run screenshot` drives Playwright against `vite preview`. Playwright's
+Chromium download is blocked on some networks, so the script falls back to an
+installed Chrome or Edge (`PW_CHANNEL=chrome|msedge|chromium` to force one).
+
+Publishing to GitHub: see [PUBLISH.md](./PUBLISH.md) and
+[GITHUB-SETUP.md](./GITHUB-SETUP.md).
 
 ## Scope
 

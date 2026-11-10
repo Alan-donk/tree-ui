@@ -1,22 +1,22 @@
 import * as React from "react"
 
 import { Badge } from "@/demo/components/ui"
-import { CodeFileIcon, FileIcon, FolderIcon, FolderOpenIcon, JsonFileIcon } from "@/demo/components/icons"
+import { CodeFileIcon, FileIcon, FolderIcon, FolderOpenIcon } from "@/demo/components/icons"
 import { fileTree } from "@/demo/data"
 import { Tree, type TreeNode, type TreeRenderContext } from "@/registry/tree/tree"
 
-const fileIcons: Record<string, React.ReactNode> = {
-  "package.json": <JsonFileIcon />,
-  "tsconfig.json": <JsonFileIcon />,
-}
+const iconClassName = "size-4"
 
 function iconFor(node: TreeNode, ctx: TreeRenderContext): React.ReactNode {
-  if (node.id in fileIcons) return fileIcons[node.id]
   if (node.children) {
-    return ctx.isExpanded ? <FolderOpenIcon /> : <FolderIcon />
+    return ctx.isExpanded ? (
+      <FolderOpenIcon className={iconClassName} />
+    ) : (
+      <FolderIcon className={iconClassName} />
+    )
   }
-  if (/\.(tsx?|jsx?)$/.test(node.id)) return <CodeFileIcon />
-  return <FileIcon />
+  if (/\.(tsx?|jsx?)$/.test(node.id)) return <CodeFileIcon className={iconClassName} />
+  return <FileIcon className={iconClassName} />
 }
 
 function actionsFor(node: TreeNode): React.ReactNode {
