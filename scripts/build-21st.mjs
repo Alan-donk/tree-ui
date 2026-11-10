@@ -41,6 +41,8 @@ import type { ReactNode } from "react"
 
 const bundle = `${header}
 ${chunks.join("\n\n")}
+
+export default Tree
 `
 
 await mkdir(outDir, { recursive: true })
