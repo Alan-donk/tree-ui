@@ -1,0 +1,33 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "tree-ui",
+  "homepage": "https://github.com/OWNER/tree-ui",
+  "items": [
+    {
+      "name": "tree",
+      "type": "registry:ui",
+      "title": "Tree",
+      "description": "Accessible, keyboard-first tree view with async children, typeahead and multi-select. Zero runtime dependencies.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "categories": ["tree", "file-tree", "navigation", "accessibility"],
+      "files": [
+        {
+          "path": "src/registry/tree/tree.tsx",
+          "target": "@components/tree/tree.tsx",
+          "type": "registry:ui"
+        },
+        {
+          "path": "src/registry/tree/use-tree.ts",
+          "target": "@components/tree/use-tree.ts",
+          "type": "registry:lib"
+        },
+        {
+          "path": "src/registry/tree/types.ts",
+          "target": "@components/tree/types.ts",
+          "type": "registry:lib"
+        }
+      ]
+    }
+  ]
+}

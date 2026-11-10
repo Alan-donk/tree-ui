@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+.smoke/
+public/r/
+*.local
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.tsbuildinfo
+npm-debug.log*

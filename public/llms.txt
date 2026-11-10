@@ -1,0 +1,57 @@
+# tree-ui
+
+> An accessible, zero-dependency tree view component for React 19 + Tailwind CSS v4
+> projects that use shadcn/ui CSS variables. Distributed as a shadcn registry item.
+
+## Install
+
+Command:
+
+    npx shadcn@latest add {{REGISTRY_URL}}
+
+The registry item installs exactly three files:
+
+- components/tree/tree.tsx  (registry:ui)
+- components/tree/use-tree.ts  (registry:lib)
+- components/tree/types.ts  (registry:lib)
+
+The JSON at {{REGISTRY_URL}} embeds the full source of all three files. No npm
+package, no runtime dependencies, no context provider, no portals. React and
+Tailwind are peer requirements.
+
+## Public API
+
+Tree props:
+
+- data: TreeNode[] — root nodes, `id` must be unique
+- aria-label: string — accessible name, required
+- selectionMode: "none" | "single" | "multiple" (default "single")
+- expandedIds / defaultExpandedIds / onExpandedChange
+- selectedIds / defaultSelectedIds / onSelectionChange
+- loadChildren: (node) => Promise<TreeNode[]> — async children, cached per id
+- onLoadError: (node, error) => void
+- renderIcon / renderActions: (node, ctx) => ReactNode
+- renderEmpty: () => ReactNode
+- indent: number (default 16)
+- messages: Partial<TreeMessages> — loading, loadFailed, retry, empty, expand, collapse
+- className / itemClassName
+
+TreeNode fields: id, label (ReactNode), children?, icon?, disabled?, searchText?, data?
+
+Behavior notes:
+
+- Children of async nodes load on first expand and stay cached.
+- Failed loads render a Retry button and announce through role="status"; Enter on
+  the focused failed node retries.
+- Keyboard: ArrowUp/Down move, ArrowRight expands or enters a child, ArrowLeft
+  collapses or moves to parent, Home/End jump, Enter/Space select, "*" expands
+  siblings, printable characters run typeahead, double click toggles.
+- Accessible markup: role tree/treeitem with aria-level, aria-posinset,
+  aria-setsize, aria-expanded, aria-selected, aria-disabled, aria-busy.
+- No window access during render, so it is SSR safe.
+
+## Repository
+
+- Source: https://github.com/{{OWNER}}/{{REPO}}
+- Demo: {{SITE_URL}}
+- License: MIT
