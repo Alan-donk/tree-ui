@@ -1,7 +1,13 @@
 # GitHub 配置与发布指南（Windows）
 
-本仓库已经在本地完成 `git init`、首次提交和 `v0.1.0` tag，**只差 GitHub 这一侧**。
-下面按"先配认证 → 再建仓库 → 推送 → 开 Pages → 收尾"的顺序做一遍即可。
+本仓库已发布到 GitHub：
+
+- 仓库：<https://github.com/Alan-donk/tree-ui>
+- Demo：<https://alan-donk.github.io/tree-ui/>
+- Registry：<https://alan-donk.github.io/tree-ui/r/tree.json>
+- Release：<https://github.com/Alan-donk/tree-ui/releases/tag/v0.1.0>
+
+下面是当初从零配置的完整流程，保留给换机器、迁移仓库或二次发布时参考。
 
 当前机器状态（已核对）：
 
