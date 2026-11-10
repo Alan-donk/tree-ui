@@ -1,7 +1,7 @@
 # tree-ui
 
-> An accessible, zero-dependency tree view for shadcn/ui projects. Install with the
-> shadcn CLI and own the three files it writes.
+> An accessible tree view for shadcn/ui: virtualized for 10k+ rows, filterable,
+> async-ready, and zero dependencies. Install with the shadcn CLI and own the code.
 
 [![tree-ui demo](docs/preview.png)](https://alan-donk.github.io/tree-ui)
 
@@ -16,11 +16,15 @@ npx shadcn@latest add https://alan-donk.github.io/tree-ui/r/tree.json
 This writes:
 
 - `components/tree/tree.tsx` — the component
-- `components/tree/use-tree.ts` — state, keyboard and async logic
+- `components/tree/use-tree.ts` — state, keyboard, filter and async logic
 - `components/tree/types.ts` — public types
 
 Requirements: React 19 and the default shadcn/ui CSS variables (`bg-accent`,
 `ring-ring`, `text-muted-foreground`, …). There are no runtime dependencies.
+
+Prefer a package? The same source is published as `@alan-donk/tree-ui`
+(`npm i @alan-donk/tree-ui`), but the registry is the recommended path — you get
+code you can edit.
 
 Manual install: copy `src/registry/tree/*` from the repository into
 `components/tree/`.
@@ -69,7 +73,24 @@ retry affordance that is also reachable with Enter.
 Cmd/Ctrl-click toggles, Shift-click selects the visible range, disabled nodes are
 skipped.
 
-![Four live examples: file tree, async children, multi-select and custom slots](docs/examples.png)
+### Large trees: windowing + filter
+
+```tsx
+<Tree
+  data={files}
+  aria-label="Files"
+  height={320}        // fixed viewport → only visible rows are mounted
+  filter={query}      // case-insensitive; ancestors auto-open, matches highlighted
+  defaultExpandedIds={folderIds}
+/>
+```
+
+2,000+ rows mount as ~20. Arrow keys, Home/End and typeahead scroll the active row
+into view, and `aria-posinset` / `aria-setsize` keep reporting the full tree, not
+the window. Filtering is view-only: your expansion and selection state is untouched
+and comes back when the filter clears.
+
+![Five live examples: file tree, async children, multi-select, custom slots and a 2,080-row virtualized tree](docs/examples.png)
 
 ## API
 
@@ -78,6 +99,9 @@ skipped.
 | `data` | `TreeNode[]` | — | Root nodes; `id` must be unique |
 | `aria-label` | `string` | — | Accessible name (required) |
 | `selectionMode` | `"none" \| "single" \| "multiple"` | `"single"` | Selection behaviour |
+| `filter` | `string` | — | Case-insensitive filter; view-only, ancestors auto-expand |
+| `height` | `number` | — | Fixed height in px; enables windowing |
+| `overscan` | `number` | `6` | Extra rows rendered outside the viewport |
 | `expandedIds` | `string[]` | — | Controlled expansion |
 | `defaultExpandedIds` | `string[]` | `[]` | Initial expansion |
 | `onExpandedChange` | `(ids: string[]) => void` | — | Expansion callback |
@@ -113,9 +137,10 @@ skipped.
 Implements the WAI-ARIA tree view pattern: a single tab stop with roving focus,
 `role="tree"` / `role="treeitem"`, plus `aria-level`, `aria-posinset`,
 `aria-setsize`, `aria-expanded`, `aria-selected`, `aria-disabled` and
-`aria-busy`. Async failures are announced through a polite live region.
-Transitions are `motion-safe` only. Tests include an axe scan of the rendered
-tree.
+`aria-busy`. Windowed rendering keeps those attributes accurate for the whole
+tree, not just the rendered rows. Async failures are announced through a polite
+live region. Transitions are `motion-safe` only. Tests include an axe scan of the
+rendered tree.
 
 ![Keyboard reference and accessibility notes](docs/accessibility.png)
 
@@ -126,9 +151,10 @@ tree.
 
 ```bash
 npm install
-npm run dev        # demo site
-npm run screenshot # refresh docs/*.png from the built demo
-npm run verify     # lint + typecheck + tests + build + registry checks
+npm run dev         # demo site
+npm run screenshot  # refresh docs/*.png from the built demo
+npm run build:lib   # emit dist-lib/ (npm package entry)
+npm run verify      # lint + typecheck + tests + build + registry + package checks
 ```
 
 `npm run screenshot` drives Playwright against `vite preview`. Playwright's
@@ -140,9 +166,9 @@ Publishing to GitHub: see [PUBLISH.md](./PUBLISH.md) and
 
 ## Scope
 
-v0.1.0 ships a data-driven tree with async children and multi-select.
-Virtualization, drag-and-drop, search highlighting and a Vue port are on the
-roadmap — see [CHANGELOG.md](./CHANGELOG.md).
+v0.2.0 ships a data-driven tree with async children, multi-select, filtering and
+windowed rendering. Drag-and-drop, tri-state checkboxes, column alignment and a Vue
+port are on the roadmap — see [CHANGELOG.md](./CHANGELOG.md).
 
 ## License
 

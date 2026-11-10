@@ -5,7 +5,7 @@
 export const site = {
   owner: "Alan-donk",
   repo: "tree-ui",
-  version: "0.1.0",
+  version: "0.2.0",
 } as const
 
 export const repoUrl = `https://github.com/${site.owner}/${site.repo}`

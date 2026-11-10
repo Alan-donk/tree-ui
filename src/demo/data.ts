@@ -90,6 +90,21 @@ export function resetAsyncDemo(): void {
   attempts.clear()
 }
 
+/** 80 folders × 25 files = 2,080 rows, used by the virtualized demo. */
+export function createLargeTree(folders = 80, filesPerFolder = 25): TreeNode[] {
+  return Array.from({ length: folders }, (_, folder) => {
+    const id = `package-${String(folder).padStart(2, "0")}`
+    return {
+      id,
+      label: id,
+      children: Array.from({ length: filesPerFolder }, (_, file) => ({
+        id: `${id}/file-${String(file).padStart(2, "0")}`,
+        label: `file-${String(file).padStart(2, "0")}.ts`,
+      })),
+    }
+  })
+}
+
 export const orgTree: TreeNode[] = [
   {
     id: "engineering",

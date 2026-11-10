@@ -11,3 +11,4 @@ Thumbs.db
 .idea/
 *.tsbuildinfo
 npm-debug.log*
+dist-lib/

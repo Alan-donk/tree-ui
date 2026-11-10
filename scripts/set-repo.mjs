@@ -40,6 +40,7 @@ async function rewrite(path, transform) {
 
 await rewrite("package.json", (content) => {
   const pkg = JSON.parse(content)
+  pkg.name = `@${owner.toLowerCase()}/${repo.toLowerCase()}`
   pkg.repository = { type: "git", url: `git+https://github.com/${owner}/${repo}.git` }
   pkg.homepage = `https://github.com/${owner}/${repo}`
   pkg.bugs = { url: `https://github.com/${owner}/${repo}/issues` }

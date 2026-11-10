@@ -6,7 +6,7 @@ import tseslint from "typescript-eslint"
 
 export default tseslint.config(
   {
-    ignores: ["dist/**", "node_modules/**", "public/r/**", ".smoke/**"],
+    ignores: ["dist/**", "dist-lib/**", "node_modules/**", "public/r/**", ".smoke/**"],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,

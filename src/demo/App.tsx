@@ -2,6 +2,7 @@ import { AsyncTree } from "@/demo/demos/async-tree"
 import { BasicTree } from "@/demo/demos/basic-tree"
 import { CustomTree } from "@/demo/demos/custom-tree"
 import { MultiSelectTree } from "@/demo/demos/multi-select-tree"
+import { VirtualTree } from "@/demo/demos/virtual-tree"
 import { GithubIcon, TreeMark } from "@/demo/components/icons"
 import {
   Badge,
@@ -36,8 +37,8 @@ const features = [
     body: "Pass a loadChildren function and nodes fetch on first expand, cache the result and announce failures with a retry affordance.",
   },
   {
-    title: "Controlled or not",
-    body: "Expansion and selection both work controlled or uncontrolled. Swap in expandedIds or selectedIds whenever you need them.",
+    title: "Scales to 10k+ rows",
+    body: "Give it a height and it windows the tree: about twenty rows stay mounted however deep the data goes. The keyboard keeps the active row in view.",
   },
 ]
 
@@ -66,6 +67,9 @@ const propsRows: Array<[string, string, string, string]> = [
   ["data", "TreeNode[]", "—", "Root nodes. Every node needs a unique id."],
   ["aria-label", "string", "—", "Accessible name for the tree. Required."],
   ["selectionMode", '"none" | "single" | "multiple"', '"single"', "Selection behaviour and aria-selected."],
+  ["filter", "string", "—", "Case-insensitive label filter. View-only; matched ancestors open."],
+  ["height", "number", "—", "Fixed height in px. Enables windowing for large trees."],
+  ["overscan", "number", "6", "Extra rows rendered above and below the viewport."],
   ["expandedIds", "string[]", "—", "Controlled expanded ids."],
   ["defaultExpandedIds", "string[]", "[]", "Initial expanded ids when uncontrolled."],
   ["onExpandedChange", "(ids: string[]) => void", "—", "Fires on expand, collapse and * expansion."],
@@ -146,6 +150,7 @@ export function App() {
         <section className="pt-14 pb-10 sm:pt-20">
           <div className="flex flex-wrap items-center gap-2">
             <Badge className="border-brand/40 bg-brand/10 text-brand">shadcn registry</Badge>
+            <Badge>virtualized</Badge>
             <Badge>zero dependencies</Badge>
             <Badge>MIT</Badge>
           </div>
@@ -157,8 +162,9 @@ export function App() {
             .
           </h1>
           <p className="mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
-            Keyboard-first, accessible, async-ready, and styled with the tokens you already have. Install it
-            with the shadcn CLI and own the three files it writes.
+            Keyboard-first, accessible, async-ready and virtualized for ten thousand rows — styled with
+            the tokens you already have. Install it with the shadcn CLI and own the three files it
+            writes.
           </p>
 
           <div className="mt-7 flex max-w-2xl items-center gap-2 rounded-lg border border-border bg-muted/30 p-1.5 ps-3">
@@ -259,10 +265,21 @@ and add the tree component to my project.`}</CodeBlock>
         <section id="examples" className="scroll-mt-20 border-t border-border/70 py-12">
           <SectionHeading
             eyebrow="Examples"
-            title="Four trees, one component"
+            title="Five trees, one component"
             description="Every example below is live: it is the real component, not a screenshot."
           />
           <div className="grid gap-4 lg:grid-cols-2">
+            <Card className="lg:col-span-2">
+              <CardHeader>
+                <CardTitle>2,080 rows + filter</CardTitle>
+                <CardDescription>
+                  Windowing keeps the DOM small; the filter opens ancestors and highlights matches.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <VirtualTree />
+              </CardContent>
+            </Card>
             <Card>
               <CardHeader>
                 <CardTitle>File tree</CardTitle>

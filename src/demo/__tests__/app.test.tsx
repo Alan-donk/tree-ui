@@ -13,5 +13,7 @@ describe("demo site", () => {
     expect(screen.getByRole("tree", { name: "Workspace packages" })).toBeInTheDocument()
     expect(screen.getByRole("tree", { name: "Teams" })).toBeInTheDocument()
     expect(screen.getByRole("tree", { name: "Files with custom icons" })).toBeInTheDocument()
+    expect(screen.getByRole("tree", { name: "Package files" })).toBeInTheDocument()
+    expect(screen.getByRole("searchbox", { name: "Filter files" })).toBeInTheDocument()
   })
 })

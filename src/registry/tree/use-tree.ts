@@ -1,12 +1,13 @@
 import * as React from "react"
 
-import type { FlatNode, SelectionMode, TreeNode, TreeMessages } from "./types"
+import type { FlatNode, SelectionMode, TreeNode, TreeMessages } from "./types.js"
 
 export const DEFAULT_MESSAGES: TreeMessages = {
   loading: "Loading…",
   loadFailed: "Couldn't load children.",
   retry: "Retry",
   empty: "No items",
+  noMatches: "No matching items",
   expand: "Expand",
   collapse: "Collapse",
 }
@@ -15,6 +16,7 @@ export interface UseTreeOptions {
   data: TreeNode[]
   selectionMode: SelectionMode
   messages: TreeMessages
+  filter?: string
   expandedIds?: string[]
   defaultExpandedIds?: string[]
   onExpandedChange?: (ids: string[]) => void
@@ -62,6 +64,7 @@ export function useTree(options: UseTreeOptions): TreeController {
     data,
     selectionMode,
     messages,
+    filter,
     expandedIds,
     defaultExpandedIds,
     onExpandedChange,
@@ -153,10 +156,43 @@ export function useTree(options: UseTreeOptions): TreeController {
     [asyncChildren, loadChildren],
   )
 
+  const filterQuery = filter?.trim().toLowerCase() ?? ""
+  /**
+   * Filtering is view-only: it never mutates expansion or selection. Ancestors of
+   * a match are force-expanded so the match is always reachable, and non-matching
+   * branches are dropped from the rendered tree.
+   */
+  const filtered = React.useMemo(() => {
+    if (!filterQuery) return null
+    const matchedIds = new Set<string>()
+    const autoExpanded = new Set<string>()
+    const build = (nodes: TreeNode[]): TreeNode[] => {
+      const out: TreeNode[] = []
+      for (const node of nodes) {
+        const own = textOf(node).includes(filterQuery)
+        const children = build(getChildren(node))
+        if (own) matchedIds.add(node.id)
+        if (!own && children.length === 0) continue
+        autoExpanded.add(node.id)
+        out.push({ ...node, children })
+      }
+      return out
+    }
+    return { nodes: build(data), matchedIds, autoExpanded }
+  }, [data, filterQuery, getChildren])
+
+  const expandedEffective = React.useMemo(
+    () => (filtered ? new Set([...expandedSet, ...filtered.autoExpanded]) : expandedSet),
+    [expandedSet, filtered],
+  )
+
   const visible = React.useMemo(() => {
+    const roots = filtered ? filtered.nodes : data
+    const childrenOf = filtered ? (node: TreeNode) => node.children ?? [] : getChildren
+    const canExpand = filtered ? (node: TreeNode) => childrenOf(node).length > 0 : hasChildren
     const out: FlatNode[] = []
     const stack: { nodes: TreeNode[]; index: number; level: number; parentId: string | null }[] = [
-      { nodes: data, index: 0, level: 0, parentId: null },
+      { nodes: roots, index: 0, level: 0, parentId: null },
     ]
     while (stack.length > 0) {
       const frame = stack[stack.length - 1]
@@ -168,7 +204,7 @@ export function useTree(options: UseTreeOptions): TreeController {
       const node = frame.nodes[frame.index]
       frame.index += 1
       if (!node) continue
-      const canExpand = hasChildren(node)
+      const canExpandNode = canExpand(node)
       out.push({
         id: node.id,
         node,
@@ -176,11 +212,11 @@ export function useTree(options: UseTreeOptions): TreeController {
         parentId: frame.parentId,
         posinset: frame.index,
         setsize: frame.nodes.length,
-        hasChildren: canExpand,
+        hasChildren: canExpandNode,
       })
-      if (canExpand && expandedSet.has(node.id)) {
+      if (canExpandNode && expandedEffective.has(node.id)) {
         stack.push({
-          nodes: getChildren(node),
+          nodes: childrenOf(node),
           index: 0,
           level: frame.level + 1,
           parentId: node.id,
@@ -188,7 +224,7 @@ export function useTree(options: UseTreeOptions): TreeController {
       }
     }
     return out
-  }, [data, expandedSet, hasChildren, getChildren])
+  }, [data, expandedEffective, filtered, getChildren, hasChildren])
 
   // Focus falls back to `null` (and therefore to the first row) when the focused
   // node disappears.
@@ -385,7 +421,7 @@ export function useTree(options: UseTreeOptions): TreeController {
     [commitSelected, selectedSet, selectOnly, selectionMode],
   )
 
-  const isExpanded = React.useCallback((id: string) => expandedSet.has(id), [expandedSet])
+  const isExpanded = React.useCallback((id: string) => expandedEffective.has(id), [expandedEffective])
   const isSelected = React.useCallback((id: string) => selectedSet.has(id), [selectedSet])
 
   const handleRowClick = React.useCallback(

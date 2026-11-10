@@ -1,6 +1,6 @@
 {
-  "name": "tree-ui",
-  "version": "0.1.0",
+  "name": "@alan-donk/tree-ui",
+  "version": "0.2.0",
   "type": "module",
   "description": "An accessible, zero-dependency tree view for shadcn/ui. Install with the shadcn CLI, own the code.",
   "license": "MIT",
@@ -37,13 +37,11 @@
     "registry:check": "node scripts/check-registry.mjs",
     "registry:smoke": "node scripts/install-smoke.mjs",
     "set-repo": "node scripts/set-repo.mjs",
-    "verify": "npm run lint && npm run typecheck && npm run test && npm run build && npm run registry:check && npm run registry:smoke",
+    "verify": "npm run lint && npm run typecheck && npm run test && npm run build && npm run build:lib && npm run registry:check && npm run registry:smoke && npm run package:check",
     "screenshot": "node scripts/screenshot.mjs",
-    "preview:build": "npm run build"
-  },
-  "dependencies": {
-    "react": "^19.3.1",
-    "react-dom": "^19.3.1"
+    "preview:build": "npm run build",
+    "build:lib": "tsc -p tsconfig.lib.json",
+    "package:check": "node scripts/check-package.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
@@ -63,10 +61,35 @@
     "globals": "^17.14.0",
     "jsdom": "^31.0.0",
     "playwright": "^1.65.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "tailwindcss": "^4.3.5",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.72.2",
     "vite": "^8.3.7",
     "vitest": "^5.1.0"
+  },
+  "author": "Alan-donk",
+  "main": "./dist-lib/tree.js",
+  "module": "./dist-lib/tree.js",
+  "types": "./dist-lib/tree.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist-lib/tree.d.ts",
+      "import": "./dist-lib/tree.js"
+    }
+  },
+  "files": [
+    "dist-lib",
+    "README.md",
+    "README.zh-CN.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "peerDependencies": {
+    "react": ">=19.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }

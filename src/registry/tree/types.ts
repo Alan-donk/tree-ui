@@ -50,6 +50,7 @@ export interface TreeMessages {
   loadFailed: string
   retry: string
   empty: string
+  noMatches: string
   expand: string
   collapse: string
 }
