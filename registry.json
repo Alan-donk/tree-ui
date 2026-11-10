@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "tree-ui",
-  "homepage": "https://github.com/OWNER/tree-ui",
+  "homepage": "https://github.com/Alan-donk/tree-ui",
   "items": [
     {
       "name": "tree",

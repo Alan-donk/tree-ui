@@ -1,6 +1,6 @@
 # Publishing tree-ui to GitHub
 
-Everything below runs from the repository root (`E:\GitHub插件`). The default
+Everything below runs from the repository root. The default
 branch is `main`.
 
 > First time on this machine? Read [GITHUB-SETUP.md](./GITHUB-SETUP.md) for the

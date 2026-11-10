@@ -3,14 +3,14 @@
 > An accessible, zero-dependency tree view for shadcn/ui projects. Install with the
 > shadcn CLI and own the three files it writes.
 
-[![tree-ui demo](docs/preview.png)]({{SITE_URL}})
+[![tree-ui demo](docs/preview.png)](https://alan-donk.github.io/tree-ui)
 
-**Live demo:** {{SITE_URL}} · **Registry:** {{REGISTRY_URL}}
+**Live demo:** https://alan-donk.github.io/tree-ui · **Registry:** https://alan-donk.github.io/tree-ui/r/tree.json
 
 ## Install
 
 ```bash
-npx shadcn@latest add {{REGISTRY_URL}}
+npx shadcn@latest add https://alan-donk.github.io/tree-ui/r/tree.json
 ```
 
 This writes:

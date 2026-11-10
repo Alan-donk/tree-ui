@@ -2,14 +2,14 @@
 
 > 一个可访问、零依赖的 shadcn/ui 树形组件。用 shadcn CLI 安装，代码归你所有。
 
-[![tree-ui 演示](docs/preview.png)]({{SITE_URL}})
+[![tree-ui 演示](docs/preview.png)](https://alan-donk.github.io/tree-ui)
 
-**在线 Demo：** {{SITE_URL}} · **Registry：** {{REGISTRY_URL}}
+**在线 Demo：** https://alan-donk.github.io/tree-ui · **Registry：** https://alan-donk.github.io/tree-ui/r/tree.json
 
 ## 安装
 
 ```bash
-npx shadcn@latest add {{REGISTRY_URL}}
+npx shadcn@latest add https://alan-donk.github.io/tree-ui/r/tree.json
 ```
 
 会写入三个文件：

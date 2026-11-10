@@ -8,10 +8,10 @@
 | 项目 | 状态 |
 | --- | --- |
 | git | 2.45.1，可用 |
-| 本地仓库 | 已有 1 个 commit + `v0.1.0` tag |
-| GitHub CLI (`gh`) | 未安装 |
-| git 凭据助手 | 未配置（`credential.helper` 为空） |
-| GitHub SSH key | 没有（现有 key 都是 其他 的） |
+| 本地仓库 | 已有提交历史 + `v0.1.0` tag |
+| GitHub CLI (`gh`) | 已安装（`C:\Program Files\GitHub CLI\gh.exe`），可能不在当前终端 PATH 里 |
+| git 凭据助手 | 用 `gh auth setup-git` 写入 |
+| GitHub SSH key | 没有 GitHub 专用 key（可选） |
 
 ---
 
@@ -53,7 +53,7 @@ git config --global credential.helper manager
 > 换账号或报"Authentication failed"时：控制面板 → 凭据管理器 → Windows 凭据 →
 > 删除 `git:https://github.com` 后重试。
 
-### 方案 C：SSH key（长期最稳，已有 ssh 目录适合你）
+### 方案 C：SSH key（长期最稳）
 
 ```powershell
 ssh-keygen -t ed25519 -C "your-email@example.com" -f "$env:US其他ROFILE\.ssh\github_ed25519"
@@ -61,7 +61,7 @@ Get-Content "$env:US其他ROFILE\.ssh\github_ed25519.pub" | Set-Clipboard   # �
 ```
 
 1. 浏览器打开 <https://github.com/settings/keys> → **New SSH key** → 粘贴公钥
-2. 在 `~/.ssh/config` 追加（避免和你现有 其他 key 冲突）：
+2. 在 `~/.ssh/config` 追加（`IdentitiesOnly` 可避免和其他 key 冲突）：
 
 ```
 Host github.com
@@ -97,7 +97,7 @@ SSH 方式的 remote 要用 `git@github.com:<owner>/tree-ui.git`（见第 3 节�
 先把占位符换成你的真实账号（会改 `package.json`、`registry.json`、`src/demo/site.ts`、中英 README）：
 
 ```powershell
-cd E:\GitHub插件
+cd <仓库目录>
 npm run set-repo -- <你的用户名>/tree-ui
 npm run screenshot          # 可选：重新截图，让图中的安装命令变成真实 URL
 git add -A

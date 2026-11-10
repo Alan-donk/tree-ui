@@ -3,7 +3,7 @@
  * rewrites these values, the README placeholders and package.json.
  */
 export const site = {
-  owner: "OWNER",
+  owner: "Alan-donk",
   repo: "tree-ui",
   version: "0.1.0",
 } as const
