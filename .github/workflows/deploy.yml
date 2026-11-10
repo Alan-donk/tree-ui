@@ -24,10 +24,10 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Resolve base path from the repository name
+        run: echo "VITE_BASE=/${GITHUB_REPOSITORY#*/}/" >> "$GITHUB_ENV"
       - name: Build demo and registry
         run: npm run build
-        env:
-          VITE_BASE: /${{ github.event.repository.name }}/
       - run: npm run registry:check
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
