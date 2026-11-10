@@ -9,9 +9,70 @@
     />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>tree-ui — accessible tree view for shadcn/ui</title>
+    <style>
+      /* Shown only when the Vite entry cannot run (e.g. opening this file directly). */
+      html,
+      body {
+        margin: 0;
+        background: #0b0b0f;
+        color: #ededed;
+        font-family:
+          ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+      }
+
+      .boot-fallback {
+        max-width: 40rem;
+        margin: 0 auto;
+        padding: 12vh 1.5rem;
+        line-height: 1.6;
+      }
+
+      .boot-fallback h1 {
+        margin: 0 0 0.75rem;
+        font-size: 1.5rem;
+        letter-spacing: -0.01em;
+      }
+
+      .boot-fallback p {
+        margin: 0 0 1rem;
+        color: #a1a1aa;
+        font-size: 0.95rem;
+      }
+
+      .boot-fallback pre {
+        overflow-x: auto;
+        margin: 0 0 1rem;
+        padding: 0.9rem 1rem;
+        border: 1px solid #27272a;
+        border-radius: 0.5rem;
+        background: #18181b;
+        color: #e4e4e7;
+        font-size: 0.85rem;
+      }
+
+      .boot-fallback code {
+        color: #c4b5fd;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="boot-fallback">
+        <h1>This demo needs the Vite dev server</h1>
+        <p>
+          <code>index.html</code> is the Vite entry point, not a standalone page — it loads
+          <code>/src/demo/main.tsx</code>, which the browser cannot run by itself. That is why
+          opening the file directly shows a blank screen.
+        </p>
+        <pre>npm install
+npm run dev</pre>
+        <p>
+          Then open the URL printed in the terminal (usually
+          <code>http://localhost:5173</code>). To check the production build instead, run
+          <code>npm run build</code> then <code>npm run preview</code>.
+        </p>
+      </div>
+    </div>
     <script type="module" src="/src/demo/main.tsx"></script>
   </body>
 </html>

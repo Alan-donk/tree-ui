@@ -92,6 +92,9 @@ export function Files() {
 
 ## 本地开发
 
+> 不要直接双击打开 `index.html` —— 它只是 Vite 的入口，浏览器会显示"需要 Vite 开发服务器"
+> 的提示页。请用下面的命令启动。
+
 ```bash
 npm install
 npm run dev        # 演示站

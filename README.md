@@ -121,6 +121,9 @@ tree.
 
 ## Development
 
+> Do not open `index.html` directly in a browser — it is the Vite entry point and
+> only prints a "needs the Vite dev server" notice. Use the commands below.
+
 ```bash
 npm install
 npm run dev        # demo site
