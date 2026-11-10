@@ -41,7 +41,8 @@
     "screenshot": "node scripts/screenshot.mjs",
     "preview:build": "npm run build",
     "build:lib": "tsc -p tsconfig.lib.json",
-    "package:check": "node scripts/check-package.mjs"
+    "package:check": "node scripts/check-package.mjs",
+    "build:21st": "node scripts/build-21st.mjs"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",

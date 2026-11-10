@@ -6,7 +6,7 @@ honest: if a submission is rejected, write why.
 | Channel | Status | Action / link |
 | --- | --- | --- |
 | awesome-shadcn/ui (Registries) | PR open | [#752](https://github.com/birobirobiro/awesome-shadcn-ui/pull/752) |
-| 21st.dev | not submitted | <https://21st.dev/publish> (needs an account) — copy below |
+| 21st.dev | prepared, needs your login | `publish/21st/` + CLI commands below |
 | shadcn registry directory (namespace) | not eligible yet | needs a **flat** registry at `/registry.json` with no `content` field; see below |
 | npm | not published | `npm login` then `npm publish` (dry run: `npm run package:check`) |
 | X / Twitter | draft | copy below |
@@ -14,19 +14,30 @@ honest: if a submission is rejected, write why.
 | Hacker News (Show HN) | draft | copy below |
 | V2EX / 掘金 | draft | link the ZH article |
 
-## 21st.dev submission fields
+## 21st.dev
 
-- **Name:** tree-ui
-- **Registry URL:** `https://alan-donk.github.io/tree-ui/r/tree.json`
-- **Repository:** `https://github.com/Alan-donk/tree-ui`
-- **License:** MIT
-- **Pricing:** free
-- **Category:** Components / Trees
-- **Description:** Accessible, zero-dependency tree view for shadcn/ui with windowing for 10k+ rows, label filtering, async children and a full WAI-ARIA keyboard model.
-- **Tags:** tree, tree-view, file-tree, accessibility, virtualization, shadcn
+21st publishes **component source + a demo**, not a registry URL. `publish/21st/`
+holds a generated single-file build of the three registry files (regenerate with
+`npm run build:21st`) and its demo.
 
-Steps: sign in at <https://21st.dev/publish> → "Add component/registry" → paste the
-registry URL → paste the fields above → submit for review.
+```bash
+npm i -g @21st-dev/cli
+21st login
+21st publish ./publish/21st/tree.tsx \
+  --demo ./publish/21st/default.tsx \
+  --description "Accessible, zero-dependency tree view with windowing for 10k+ rows, label filtering, async children and a full WAI-ARIA keyboard model." \
+  --tags tree,tree-view,accessibility,virtualization \
+  --registry ui \
+  --website https://alan-donk.github.io/tree-ui/
+```
+
+CLI Review opens in Studio: check the live demo, wait for the generated cover (or
+attach one with `--preview`), then publish. `21st submit tree-ui` sends it to the
+catalog afterwards.
+
+Website alternative: `Publish → Component`, then use `publish/21st/tree.tsx` as
+`src/components/ui/tree.tsx` and `publish/21st/default.tsx` as
+`src/demos/default.tsx`.
 
 ## shadcn registry directory (optional, later)
 
