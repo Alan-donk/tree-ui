@@ -22,9 +22,9 @@ This writes:
 Requirements: React 19 and the default shadcn/ui CSS variables (`bg-accent`,
 `ring-ring`, `text-muted-foreground`, …). There are no runtime dependencies.
 
-Prefer a package? The same source is published as `@alan-donk/tree-ui`
-(`npm i @alan-donk/tree-ui`), but the registry is the recommended path — you get
-code you can edit.
+Prefer a package? `npm run build:lib` emits an ESM + `.d.ts` build with an
+`exports` map that you can publish or `npm link` yourself; the registry stays the
+supported install path because you get code you can edit.
 
 Manual install: copy `src/registry/tree/*` from the repository into
 `components/tree/`.

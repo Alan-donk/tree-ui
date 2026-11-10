@@ -22,8 +22,8 @@ npx shadcn@latest add https://alan-donk.github.io/tree-ui/r/tree.json
 前置条件：React 19 + shadcn/ui 默认 CSS 变量（`bg-accent`、`ring-ring`、
 `text-muted-foreground` 等）。**没有运行时依赖**，不引 Base UI / Radix。
 
-也发布了 npm 包 `@alan-donk/tree-ui`（`npm i @alan-donk/tree-ui`），但仍推荐
-registry：拿到的是可以直接改的源码。
+`npm run build:lib` 会产出带 `exports` 的 ESM + `.d.ts` 构建，可自行发布或
+`npm link` 使用；但推荐 registry：拿到的是可以直接改的源码。
 
 手动安装：把仓库里的 `src/registry/tree/*` 复制到 `components/tree/`。
 
